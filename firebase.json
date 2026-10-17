@@ -1,0 +1,8 @@
+{
+  "firestore": [
+    {
+      "database": "ai-studio-android-vidyutgy-8303b6a6-7c99-437d-a526-a724cc0cd867",
+      "rules": "firestore.rules"
+    }
+  ]
+}

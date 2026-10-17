@@ -1,0 +1,6 @@
+{
+  "name": "Vidyut Gyan Kendra",
+  "description": "Comprehensive educational management system for electrical engineering institutes featuring Admin, Teacher, and Student portals for attendance, assignments, timetable, and academic records.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

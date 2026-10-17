@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1832" />
+      <stop offset="60%" stop-color="#102A56" />
+      <stop offset="100%" stop-color="#1A3B75" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="108" height="108" fill="url(#bg)" />
+  <!-- Circuit grid lines -->
+  <path d="M18,34 L38,34 L54,18 L70,18 L90,38" fill="none" stroke="#FFD60A" stroke-width="1" stroke-opacity="0.3" />
+  <path d="M18,74 L38,74 L54,90 L70,90 L90,70" fill="none" stroke="#FFD60A" stroke-width="1" stroke-opacity="0.3" />
+  <circle cx="54" cy="18" r="2" fill="#FFD60A" fill-opacity="0.5" />
+  <circle cx="54" cy="90" r="2" fill="#FFD60A" fill-opacity="0.5" />
+
+  <!-- Graduation Cap -->
+  <polygon points="54,26 78,35 54,44 30,35" fill="#E2E8F0" />
+  <path d="M40,39.5 L40,47 C40,51 46,54 54,54 C62,54 68,51 68,47 L68,39.5 C64,42 59,43.5 54,43.5 C49,43.5 44,42 40,39.5 Z" fill="#CBD5E1" />
+  <path d="M72,37 L76,46 L76,51" fill="none" stroke="#FFD60A" stroke-width="1.5" />
+  <circle cx="76" cy="52" r="1.5" fill="#FFD60A" />
+
+  <!-- Open Knowledge Book -->
+  <path d="M31,63 L51,60 C53,60 54,61 54,62 L54,78 C54,77 52.5,76 50,76 L31,78 Z" fill="#94A3B8" />
+  <path d="M77,63 L57,60 C55,60 54,61 54,62 L54,78 C54,77 55.5,76 58,76 L77,78 Z" fill="#F8FAFC" />
+
+  <!-- Lightning Bolt -->
+  <polygon points="57,36 43,56 52.5,56 46.5,77 66.5,52 56,52" fill="#B45309" />
+  <polygon points="56,34 42,54 52,54 45,75 66,50 55,50" fill="#FFD60A" />
+  <polygon points="54,37 46,52 53,52 49,65 59,51 54,51" fill="#FFFBEB" />
+</svg>

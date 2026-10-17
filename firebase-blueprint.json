@@ -1,0 +1,110 @@
+{
+  "$schema": "https://firebase.google.com/schemas/firestore-blueprint-v1.json",
+  "entities": {
+    "users": {
+      "type": "collection",
+      "fields": {
+        "userId": { "type": "string" },
+        "loginId": { "type": "string" },
+        "role": { "type": "string", "enum": ["ADMIN", "TEACHER", "STUDENT"] },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "status": { "type": "string", "enum": ["ACTIVE", "INACTIVE"] },
+        "createdAt": { "type": "number" }
+      }
+    },
+    "students": {
+      "type": "collection",
+      "fields": {
+        "studentId": { "type": "string" },
+        "userId": { "type": "string" },
+        "rollNumber": { "type": "string" },
+        "classId": { "type": "string" },
+        "branch": { "type": "string" },
+        "semester": { "type": "number" },
+        "section": { "type": "string" }
+      }
+    },
+    "teachers": {
+      "type": "collection",
+      "fields": {
+        "teacherId": { "type": "string" },
+        "userId": { "type": "string" },
+        "employeeCode": { "type": "string" },
+        "department": { "type": "string" },
+        "designation": { "type": "string" },
+        "qualification": { "type": "string" }
+      }
+    },
+    "attendance_sessions": {
+      "type": "collection",
+      "fields": {
+        "sessionId": { "type": "string" },
+        "classId": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "teacherId": { "type": "string" },
+        "date": { "type": "string" },
+        "sessionSlot": { "type": "string" },
+        "createdAt": { "type": "number" }
+      }
+    },
+    "attendance_records": {
+      "type": "collection",
+      "fields": {
+        "recordId": { "type": "string" },
+        "sessionId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "status": { "type": "string", "enum": ["PRESENT", "ABSENT", "LATE", "ON_LEAVE"] },
+        "remarks": { "type": "string" },
+        "markedAt": { "type": "number" }
+      }
+    },
+    "assignments": {
+      "type": "collection",
+      "fields": {
+        "assignmentId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "classId": { "type": "string" },
+        "teacherId": { "type": "string" },
+        "issueDate": { "type": "string" },
+        "deadline": { "type": "string" },
+        "maxMarks": { "type": "number" },
+        "instructions": { "type": "string" },
+        "attachmentName": { "type": "string" },
+        "createdAt": { "type": "number" }
+      }
+    },
+    "submissions": {
+      "type": "collection",
+      "fields": {
+        "submissionId": { "type": "string" },
+        "assignmentId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "fileName": { "type": "string" },
+        "fileUri": { "type": "string" },
+        "comments": { "type": "string" },
+        "submittedAt": { "type": "number" },
+        "status": { "type": "string", "enum": ["SUBMITTED", "LATE", "EVALUATED"] },
+        "marksObtained": { "type": "number" },
+        "feedback": { "type": "string" },
+        "evaluatedAt": { "type": "number" }
+      }
+    },
+    "audit_logs": {
+      "type": "collection",
+      "fields": {
+        "logId": { "type": "string" },
+        "actorUserId": { "type": "string" },
+        "actorName": { "type": "string" },
+        "actorRole": { "type": "string" },
+        "action": { "type": "string" },
+        "affectedRecord": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "number" }
+      }
+    }
+  }
+}

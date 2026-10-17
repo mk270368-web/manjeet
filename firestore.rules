@@ -1,0 +1,137 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && getUserData().role == 'ADMIN';
+    }
+
+    function isTeacher() {
+      return isAuthenticated() && getUserData().role == 'TEACHER';
+    }
+
+    function isStudent() {
+      return isAuthenticated() && getUserData().role == 'STUDENT';
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // 1. Users collection
+    // Only Admin can create user accounts and assign Login IDs & roles.
+    // Self-registration is strictly denied.
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create, delete: if isAdmin();
+      allow update: if isAdmin() || (isOwner(userId) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'loginId', 'status']));
+    }
+
+    // 2. Student Profiles
+    match /students/{studentId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // 3. Teacher Profiles
+    match /teachers/{teacherId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // 4. Classes and Subjects
+    match /classes/{classId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /subjects/{subjectId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /teacher_assignments/{assignmentId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // 5. Attendance Sessions & Records
+    // Only Faculty and Admin can mark and save attendance sessions.
+    // Students can never create, modify, or delete attendance records.
+    match /attendance_sessions/{sessionId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAdmin() || isTeacher();
+      allow delete: if isAdmin();
+    }
+
+    match /attendance_records/{recordId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAdmin() || isTeacher();
+      allow delete: if isAdmin();
+    }
+
+    // 6. Assignments
+    // Faculty and Admin can create assignments. Students have read-only access.
+    match /assignments/{assignmentId} {
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isAdmin() || isTeacher();
+    }
+
+    // 7. Submissions
+    // Students can submit solutions for their class. Teachers evaluate and assign marks.
+    match /submissions/{submissionId} {
+      allow read: if isAuthenticated() && (
+        isAdmin() ||
+        isTeacher() ||
+        resource.data.studentId == getUserData().studentId
+      );
+      allow create: if isStudent() && request.resource.data.studentId == getUserData().studentId;
+      allow update: if (isStudent() && resource.data.studentId == getUserData().studentId && resource.data.status != 'EVALUATED')
+                    || isTeacher()
+                    || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // 8. Study Materials
+    match /study_materials/{materialId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin() || isTeacher();
+    }
+
+    // 9. Announcements
+    match /announcements/{announcementId} {
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isAdmin() || isTeacher();
+    }
+
+    // 10. Notifications
+    match /notifications/{notificationId} {
+      allow read: if isAuthenticated() && (
+        resource.data.recipientUserId == request.auth.uid ||
+        resource.data.recipientUserId == 'ALL'
+      );
+      allow update: if isAuthenticated() && (
+        resource.data.recipientUserId == request.auth.uid ||
+        resource.data.recipientUserId == 'ALL'
+      );
+      allow create: if isAdmin() || isTeacher();
+      allow delete: if isAdmin();
+    }
+
+    // 11. Audit Logs (Immutable security trail)
+    match /audit_logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAuthenticated();
+      allow update, delete: if false; // Strict immutability
+    }
+  }
+}

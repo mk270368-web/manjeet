@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Graduation Cap Rhombus (Top) -->
+    <path
+        android:fillColor="#E2E8F0"
+        android:pathData="M54,26 L78,35 L54,44 L30,35 Z" />
+
+    <!-- Graduation Cap Skullcap & Tassel -->
+    <path
+        android:fillColor="#CBD5E1"
+        android:pathData="M40,39.5 L40,47 C40,51 46,54 54,54 C62,54 68,51 68,47 L68,39.5 C64,42 59,43.5 54,43.5 C49,43.5 44,42 40,39.5 Z" />
+    <path
+        android:strokeColor="#FFD60A"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:pathData="M72,37 L76,46 L76,51" />
+    <path
+        android:fillColor="#FFD60A"
+        android:pathData="M76,52 m-1.5,0 a1.5,1.5 0 1,0 3,0 a1.5,1.5 0 1,0 -3,0" />
+
+    <!-- Open Knowledge Book (Bottom) -->
+    <path
+        android:fillColor="#94A3B8"
+        android:pathData="M31,63 L51,60 C53,60 54,61 54,62 L54,78 C54,77 52.5,76 50,76 L31,78 Z" />
+    <path
+        android:fillColor="#F8FAFC"
+        android:pathData="M77,63 L57,60 C55,60 54,61 54,62 L54,78 C54,77 55.5,76 58,76 L77,78 Z" />
+
+    <!-- Golden Electric Lightning Bolt (Center Feature) -->
+    <!-- Shadow/Outline for lightning -->
+    <path
+        android:fillColor="#B45309"
+        android:pathData="M57,36 L43,56 L52.5,56 L46.5,77 L66.5,52 L56,52 Z" />
+    <!-- Main Electric Yellow Bolt -->
+    <path
+        android:fillColor="#FFD60A"
+        android:pathData="M56,34 L42,54 L52,54 L45,75 L66,50 L55,50 Z" />
+    <!-- Bright Highlight -->
+    <path
+        android:fillColor="#FFFBEB"
+        android:pathData="M54,37 L46,52 L53,52 L49,65 L59,51 L54,51 Z" />
+</vector>
